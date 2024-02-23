@@ -1,10 +1,11 @@
-nums1 = [1,2,3,0,0,0]
-nums2 = [2,5,6]
-m = 3
-n = 3
-
 class Solution(object):
     def merge(self, nums1, m, nums2, n):
-      for j in range(n):
-          nums1[m+j] = nums2[j]
-      nums1.sort()
+        # Iterate through each element in nums2
+        for j in range(n):
+            # Place each element of nums2 into the correct position in nums1
+            # starting from the index m (end of the initial elements of nums1)
+            nums1[m+j] = nums2[j]
+
+        # After all elements of nums2 have been placed into nums1,
+        # sort nums1 to ensure the merged array is in ascending order
+        nums1.sort()

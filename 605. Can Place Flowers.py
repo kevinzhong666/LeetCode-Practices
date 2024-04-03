@@ -1,25 +1,18 @@
 class Solution(object):
     def canPlaceFlowers(self, flowerbed, n):
-        length = len(flowerbed)
+        count = 0  # Initialize count of flowers that can be planted
         i = 0
-        while i < length and n > 0:
-            # Check if current spot is empty.
-            if flowerbed[i] == 0:
-                # Check for first position, last position, and general case with two neighbors.
-                is_first_or_no_left_neighbor = (i == 0 or flowerbed[i - 1] == 0)
-                is_last_or_no_right_neighbor = (i == length - 1 or flowerbed[i + 1] == 0)
+        length = len(flowerbed)
 
-                if is_first_or_no_left_neighbor and is_last_or_no_right_neighbor:
-                    # Plant a flower here.
-                    flowerbed[i] = 1
-                    # Decrement n because we have successfully planted one flower.
-                    n -= 1
-                    # Skip the next spot to ensure no adjacent planting.
-                    i += 1
-
-            # Move to the next spot.
+        while i < length:
+            # Check if the current spot is empty, and ensure neighbors (if they exist) are also empty.
+            if flowerbed[i] == 0 and (i == 0 or flowerbed[i - 1] == 0) and (i == length - 1 or flowerbed[i + 1] == 0):
+                flowerbed[i] = 1  # Plant a flower here
+                count += 1  # Increment the count
+                i += 1  # Skip the next spot since a flower was just planted
+            if count >= n:
+                return True  # Early exit if we've planted enough flowers
             i += 1
 
-        # If n has been reduced to 0, it means we could plant all flowers without breaking the rule.
-        return n == 0
+        return count >= n  # Check if we've been able to plant at least 'n' flowers
 
